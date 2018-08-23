@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.syg.manage.dao.manage.GmChannelMapper" >
+
+	<select id="queryByParent" resultType="GmChannel">
+	SELECT * FROM gm_channel where platform = #{parentId}
+	</select>
+	
+	<select id="selectByPlatformId" resultType="GmChannel">
+  	<bind name="MbValid" value="@com.syg.manage.util.MbValid@instance()"/>
+	SELECT * FROM gm_channel
+	<where> 
+		<if test="MbValid.str(channelId)">
+		and channel_id = #{channelId}
+		</if>
+		<if test="MbValid.str(channelName)">
+		and channel_name = #{channelName}
+		</if>
+		<if test="MbValid.noZero(platformId)">
+		and platform_id = #{platformId}
+		</if>
+	</where>	
+	limit 1
+  </select>	
+	
+	<select id="queryAll" resultType="GmChannel">
+	SELECT * FROM gm_channel
+	</select>
+  <select id="queryListPageSearch" resultType="GmChannel">
+  	<bind name="MbValid" value="@com.syg.manage.util.MbValid@instance()"/>
+	SELECT * FROM gm_channel
+	<where> 
+		<if test="MbValid.noZero(example.chId)">
+		and ch_id = #{example.chId}
+		</if>
+		<if test="MbValid.str(example.channelId)">
+		and channel_id = #{example.channelId}
+		</if>
+		<if test="MbValid.str(example.channelName)">
+		and channel_name = #{example.channelName}
+		</if>
+		<if test="MbValid.str(example.platform)">
+		and platform = #{example.platform}
+		</if>
+		<if test="MbValid.noZero(example.platformId)">
+		and platform_id = #{example.platformId}
+		</if>
+		<if test="MbValid.noZero(example.kindId)">
+		and kind_id = #{example.kindId}
+		</if>
+		<if test="MbValid.str(example.channelDesc)">
+		and channel_desc = #{example.channelDesc}
+		</if>
+	</where>	
+  </select>	
+  <select id="selectByPrimaryKey" resultType="GmChannel" parameterType="java.lang.Integer" >
+    select *from gm_channel where ch_id = #{chId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from gm_channel
+    where ch_id = #{chId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="GmChannel" >
+    insert into gm_channel (ch_id, channel_id, channel_name, platform,  platform_id, kind_id,
+      channel_desc)
+    values (#{chId,jdbcType=INTEGER}, #{channelId,jdbcType=VARCHAR}, #{channelName,jdbcType=VARCHAR}, #{platform,jdbcType=VARCHAR}, 
+      #{platformId,jdbcType=INTEGER}, #{kindId,jdbcType=INTEGER}, #{channelDesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="GmChannel" >
+    insert into gm_channel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      ch_id, 
+      channel_id,
+      channel_name,
+      platform,
+      platform_id, 
+      kind_id,
+      channel_desc,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{chId,jdbcType=INTEGER},
+      #{channelId,jdbcType=VARCHAR},
+      #{channelName,jdbcType=VARCHAR},
+      #{platform,jdbcType=VARCHAR},
+      #{platformId,jdbcType=INTEGER}, 
+      #{kindId,jdbcType=INTEGER},
+      #{channelDesc,jdbcType=VARCHAR},
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="GmChannel" >
+    update gm_channel
+    <set >
+      <if test="channelId != null" >
+        channel_id = #{channelId,jdbcType=VARCHAR},
+      </if>
+      <if test="channelName != null" >
+        channel_name = #{channelName,jdbcType=VARCHAR},
+      </if>
+      <if test="platform != null" >
+        platform = #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="platformId != null" >
+        platform_id = #{platformId,jdbcType=INTEGER},
+      </if>
+      <if test="kindId != null" >
+        kind_id = #{kindId,jdbcType=INTEGER},
+      </if>
+      <if test="channelDesc != null" >
+        channel_desc = #{channelDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ch_id = #{chId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="GmChannel" >
+    update gm_channel
+    set channel_id = #{channelId,jdbcType=VARCHAR},
+      channel_name = #{channelName,jdbcType=VARCHAR},
+      platform = #{platform,jdbcType=VARCHAR},
+      platform_id = #{platformId,jdbcType=INTEGER},
+      kind_id = #{kindId,jdbcType=INTEGER},
+      channel_desc = #{channelDesc,jdbcType=VARCHAR}
+    where ch_id = #{chId,jdbcType=INTEGER}
+  </update>
+</mapper>

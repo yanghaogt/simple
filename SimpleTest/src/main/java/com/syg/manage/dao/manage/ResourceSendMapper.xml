@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.syg.manage.dao.manage.ResourceSendMapper">
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultType="ResourceSend">
+    select * from resource_send where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="ResourceSend">
+    insert into resource_send (send_type,accept_role_list,server_id,content,item_list,comment,apply_name,
+    							approval_name,update_ts,create_ts,status,channel_id,mail_title,mail_content)
+    values (#{sendType}, #{acceptRoleList},#{serverId}, #{content},#{itemList},#{comment},#{applyName},
+    						#{approvalName},#{updateTs},#{createTs},#{status},#{channelId},#{mailTitle},#{mailContent})
+  </insert>
+  
+  <insert id="insertBatch">
+    INSERT INTO resource_send (
+		send_type,
+		accept_role_list,
+		server_id,
+		content,
+		item_list,
+		comment,
+		apply_name,
+		approval_name,
+		update_ts,
+		create_ts,
+		STATUS,
+		channel_id,
+		mail_title,
+		mail_content
+	)VALUES
+	<foreach collection="roleList" item="item" index="index" separator="," >
+    (
+		#{example.sendType},
+		#{item.roleName},
+		#{item.serverId},
+		#{example.content},
+		#{example.itemList},
+		#{example.comment},
+		#{example.applyName},
+		#{example.approvalName},
+		#{example.updateTs},
+		#{example.createTs},
+		#{example.status},
+		#{example.channelId},
+		#{example.mailTitle},
+		#{example.mailContent}
+	)
+   	</foreach>
+  </insert>
+  
+  <select id="queryListPageSearch" resultType="ResourceSend">
+  	select * from resource_send
+  	<where>
+		<if test="example.status != null">
+		   and status = #{example.status}
+		</if>
+	</where>
+	order by id desc
+  </select>
+  
+  <select id="queryListSearch" resultType="ResourceSend">
+  	select * from resource_send
+  	<where>
+		<bind name="MbValid" value="@com.syg.gamemanage.util.MbValid@instance()"/>
+		<if test="MbValid.noZero(example.id)">and id = #{example.id}</if>
+		<if test="example.sendType != null and example.sendType >=0">
+		    and send_type = #{example.sendType}
+		</if>
+		<if test="MbValid.str(example.serverIds)">
+			and server_id in (${example.serverIds})
+		</if>
+		<if test="MbValid.str(example.channelIds)">
+			and channel_id in (${example.channelIds})
+		</if>
+		<if test="example.status>=0">
+		   and status = #{example.status}
+		</if>
+		<if test="example.acceptRoleList != null and example.acceptRoleList !=''">
+				AND accept_role_list like  concat('%',#{example.acceptRoleList},'%')
+		</if>
+		<if test="example.applyName != null and example.applyName !=''">
+				AND apply_name like  concat('%',#{example.applyName},'%')
+		</if>
+		<if test="example.approvalName != null and example.approvalName !=''">
+				AND approval_name like  concat('%',#{example.approvalName},'%')
+		</if>
+		<if test="example.content != null and example.content !=''">
+				AND content like  concat('%',#{example.content},'%')
+		</if>		
+		<if test="example.comment != null and example.comment !=''">
+			AND comment like  concat('%',#{example.comment},'%')
+		</if>	
+		<if test="example.mailContent != null and example.mailContent !=''">
+				AND mail_content like  concat('%',#{example.mailContent},'%')
+		</if>
+		<if test="example.mailTitle != null and example.mailTitle !=''">
+				AND mail_title like  concat('%',#{example.mailTitle},'%')
+		</if>				
+	</where>
+	order by id desc
+  </select>
+  
+  <update id="updateStatusById">
+		UPDATE resource_send
+		SET
+		status=#{status},
+		update_ts=#{updateTs}
+		<if test="approvalName != null and approvalName !=''">
+			,approval_name=#{approvalName}
+		</if>   
+		WHERE
+		id=#{id}
+	</update>
+
+	<update id="updateResourceSend">
+		UPDATE resource_send
+		SET
+		status=#{status},
+		update_ts=#{updateTs}
+		<if test="approvalName != null and approvalName !=''">
+			,approval_name=#{approvalName}
+		</if>
+		<if test="sendLog != null and sendLog !=''">
+			,send_log=#{sendLog}
+		</if>   
+		WHERE
+		id=#{id}
+	</update>
+		
+   <update id="updateStatus">
+		UPDATE resource_send
+		SET
+		status=#{status},
+		update_ts=#{updateTs}
+		<if test="approvalName != null and approvalName !=''">
+			,approval_name=#{approvalName}
+		</if>   
+		<if test="operationDesc != null and operationDesc !=''">
+			,operation_desc=#{operationDesc}
+		</if>
+		WHERE
+		id=#{id}
+	</update>
+	
+	<update id="updateBatch">
+		UPDATE resource_send
+		SET
+		status=#{example.status},
+		update_ts=#{example.updateTs},
+		approval_name=#{example.approvalName}
+		WHERE id in 
+		<foreach collection="idList" index="index" item="item" separator="," open="(" close=")">
+	        #{item}
+	    </foreach>
+	</update>
+	
+	<select id="selectByIds" resultType="ResourceSend">
+	   select * from resource_send where id in (${ids}) and status != 1 limit 1
+	</select>
+	
+	<select id="selectByIdsSendType" resultType="ResourceSend">
+	   select * from resource_send where id in (${ids}) and send_type in(0,1,3) limit 1
+	</select>
+	
+</mapper>

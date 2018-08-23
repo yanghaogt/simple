@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.syg.manage.dao.manage.SurveyContentMpr">
+
+	<select id="queryListPageSearch" resultType="SurveyContent">
+		SELECT * FROM survey_content
+		<where>
+			<bind name="MbValid" value="@com.syg.manage.util.MbValid@instance()" />
+			<if test="MbValid.noZero(example.scId)">
+				and sc_id = #{example.scId}
+			</if>
+			<if test="MbValid.noZero(example.stId)">
+				and st_id = #{example.stId}
+			</if>
+			<if test="MbValid.str(example.imageUrl)">
+				and image_url = #{example.imageUrl}
+			</if>
+			<if test="MbValid.str(example.scTitle)">
+				and sc_title = #{example.scTitle}
+			</if>
+			<if test="MbValid.str(example.scRemark)">
+				and sc_remark = #{example.scRemark}
+			</if>
+			<if test="MbValid.noZero(example.totalNumber)">
+				and total_number = #{example.totalNumber}
+			</if>
+			<if test="MbValid.shDateBegin(example.createTimeSh)">
+				and create_time &gt;= #{example.createTimeSh.begin}
+			</if>
+			<if test="MbValid.shDateEnd(example.createTimeSh)">
+				and create_time &lt;= #{example.createTimeSh.end}
+			</if>
+		</where>
+	</select>
+	
+	<select id="queryById" resultType="SurveyContent">
+	SELECT * FROM survey_content WHERE sc_id = #{id}
+	</select>
+	
+	<select id="queryByStId" resultType="SurveyContent">
+	SELECT * FROM survey_content WHERE total_number = (SELECT MAX(total_number) FROM survey_content WHERE st_id = #{stId}) and st_id = #{stId}
+	</select>
+	
+	<delete id="deleteById">
+	DELETE FROM survey_content WHERE sc_id = #{id}
+	</delete>
+	
+	<insert id="saveItem" parameterType="SurveyContent" useGeneratedKeys="true">
+			INSERT INTO survey_content 
+			(
+				st_id,
+				image_url,
+				sc_title,
+				sc_remark,
+				operator,
+				create_time
+
+			)VALUES
+			(
+				#{stId},
+				#{imageUrl},
+				#{scTitle},
+				#{scRemark},
+				#{operator},
+				#{createTime}
+			)
+	</insert>
+	
+	<update id="updateItem">
+		UPDATE survey_content
+		SET
+			st_id = #{stId},
+			image_url = #{imageUrl},
+			sc_title = #{scTitle},
+			sc_remark = #{scRemark},
+			update_time = #{updateTime}
+		WHERE
+			sc_id=#{scId}
+	</update>
+
+</mapper>

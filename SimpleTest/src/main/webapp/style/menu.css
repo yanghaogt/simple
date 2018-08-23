@@ -1,0 +1,61 @@
+/*zhangyu add*/
+.menu{ width:93%; margin-left: 180px;}
+.menu ul li{ float:left; list-style: none; margin-right:25px; }
+.menu ul li a{display:block; padding:8px 10px 8px; color:#C5CED6;}
+.menu ul li a:hover{color:#fff;}
+.menus{ width:100%; display:none;}
+.menus ul li{ float:left; list-style: none; margin-right:10px; }
+.menus ul li a{display:block; padding:12px 10px 10px; color:#C5CED6;}
+.menus ul li a:hover{color:#fff;}
+@media (max-width: 767px){			
+	.menu{display: none;}
+	.menus{display:block;}
+}
+.menu ul{margin-bottom: 0;}
+.menu ul li {cursor : pointer;}
+.menu ul li a.checked{background : #3C434A; color : #fff;}
+.navbar .menus ul li a:hover,.navbar .menus ul li a:active,.navbar .menus ul li a:focus{background: #3C434A;}
+.navbar .menu ul li a:hover,.navbar .menu ul li a:active,.navbar .menu ul li a:focus{background: #3C434A;}
+/*20151111*/
+.mainbar .bread-crumb{border-top:0;margin-top:0;padding:0;line-height: 20px;}
+.mainbar .matter{padding:5px 0;}
+.mainbar .bread-crumb a{display: inline-block;}
+.menu ul li a{padding:11px 10px;}
+.menu ul li a:last{border-right:0 none;}
+.table thead>tr>th, .table tbody>tr>th, .table tfoot>tr>th{vertical-align: middle;padding-top: 5px;padding-bottom: 5px;}
+.table thead>tr>td, .table tbody>tr>td, .table tfoot>tr>td{vertical-align: middle;padding-top: 1px; padding-bottom: 1px;}
+.form-control{height:25px;font-size:12px;padding:0;font-family:microsoft yahei;padding-left: 5px;}
+.form-control.twinHasDatepicker{height: 17px;}/*涓や釜鏃堕棿閫夋嫨杈撳叆妗嗗湪涓�釜th涓椂娣诲姞className twinHasDatepicker*/
+table .btn{padding:3px 4px;}
+.widget #tableHead{top: 38px;}
+.widget .widget-foot, .modal-footer{padding:4px 9px;}
+.pagination{margin:0;}
+.pagination>li>a, .pagination>li>span{padding:4px 10px;font-size: 10px;}
+.widget{margin-bottom: 0;}
+/*鑷姩琛ㄦ牸 .autoHeader楂樺害鏄浐瀹氳〃澶寸殑楂樺害margin-bottom鍜宧eight鐨勫�淇濇寔涓�嚧*/
+.autoHeader{overflow: hidden;position:relative;  background-color: #F8F8F8;
+  background: -webkit-gradient(linear, left top, left bottom, from(#F8F8F8), to(#e4e4e4));
+  background: -webkit-linear-gradient(top, #F8F8F8, #e4e4e4);
+  background: -moz-linear-gradient(top, #f8f8f8, #e4e4e4);
+  background: -ms-linear-gradient(top, #f8f8f8, #e4e4e4);
+  background: -o-linear-gradient(top, #f8f8f8, #e4e4e4);
+  background: linear-gradient(top, #f8f8f8, #e4e4e4);}
+.autoTbodyExtra{overflow: auto;}
+.widget .table-bordered td{
+	word-break: break-all;
+}
+/*sidebar,header的宽高调整*/
+.sidebar{width:180px;}
+.mainbar{min-height: 0;margin-left:180px;}
+.menubutton{line-height: 34px;padding-left\0:11px;}
+.navbar-brand{padding: 7px 35px 0 14px;}
+.navbar-nav > li > a{padding: 4px 10px;}
+.menu ul li a {padding: 6px 10px;}
+.navbar-toggle{margin-top:4px;margin-bottom:4px;padding:1px 10px;}
+/*自定义滚动条*/
+.autoTbodyMobile::-webkit-scrollbar{width:8px;height:8px;}
+.autoTbodyMobile::-webkit-scrollbar-button{width:8px;height:5px;}
+.autoTbodyMobile::-webkit-scrollbar-track{background:#eee;border:thin solid lightgray;box-shadow:0px 0px 3px #dfdfdf inset;border-radius:10px;}
+.autoTbodyMobile::-webkit-scrollbar-thumb{background:#999;border:thin solid gray;border-radius:10px;}
+.autoTbodyMobile::-webkit-scrollbar-corner{background:#82AFFF;}
+.autoTbodyMobile::-webkit-scrollbar-thumb:hover{background:#7d7d7d;}

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.syg.manage.dao.manage.HolidayMpr">
+	
+	<select id="queryAll" resultType="Holiday">
+		SELECT * FROM holiday
+	</select>
+	
+	<insert id="insertItem" parameterType="Holiday" useGeneratedKeys="true">
+		INSERT INTO holiday
+		(
+		logDate,name
+		)VALUES
+		(
+		#{logDate},#{name}
+		)
+	</insert>
+
+	<delete id="deleteAll">
+		DELETE FROM holiday
+	</delete>
+	
+	<select id="queryListPageSearch" resultType="Holiday">
+		SELECT * FROM holiday
+		<bind name="MbValid" value="@com.syg.manage.util.MbValid@instance()"/>
+		<where>
+		    <if test="MbValid.noZero(example.id)">
+			and `id` = #{example.id}
+			</if>
+			<if test="MbValid.str(example.name)">
+			and name = #{example.name}
+			</if>
+			<if test="MbValid.shDateBegin(example.logDateSh)">
+			and logDate &gt;= #{example.logDateSh.begin}
+			</if>
+			<if test="MbValid.shDateEnd(example.logDateSh)">
+			and logDate &lt;= #{example.logDateSh.end}
+			</if>
+		</where>
+  </select>
+	
+</mapper>

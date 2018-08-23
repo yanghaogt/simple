@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.syg.manage.dao.manage.SummaryNewAddUserMpr">
+
+	<select id="queryAll" resultType="SummaryNewAddUser">
+		SELECT
+			*
+		FROM
+			summary_newadduser 
+		WHERE
+			search_type = 0
+		ORDER BY
+		log_time
+	</select>
+	
+	<select id="queryChannelAndDate" resultType="SummaryNewAddUser">
+		SELECT
+			*
+		FROM
+			summary_newadduser
+		WHERE
+			search_type = 0
+		AND log_time IN 
+			<foreach collection="date" index="index" item="item" open="(" separator="," close=")">  
+            	#{item}   
+    		</foreach>  
+		AND channel_id = #{channelId}
+		ORDER BY
+			log_time
+	</select>
+	
+	<select id="queryBySearchTypeAndLeDate" resultType="SummaryNewAddUser">
+		SELECT
+			*
+		FROM
+			summary_newadduser 
+		WHERE
+			search_type = #{searchType}  and log_time <![CDATA[<=]]> #{date} 
+		ORDER BY
+		log_time
+	</select>
+
+	<select id="querySearch" resultType="SummaryNewAddUser">
+		SELECT * FROM summary_newadduser 
+		<where>
+		<bind name="MbValid" value="@com.syg.manage.util.MbValid@instance()"/>
+		<if test="MbValid.str(example.gameKind)">
+			and game_kind = #{example.gameKind}
+		</if>
+		<if test="MbValid.str(example.channelId)">
+			and channel_id = #{example.channelId}
+		</if>
+		<if test="MbValid.str(example.gameVersion)">
+			and game_version = #{example.gameVersion}
+		</if>
+		<if test="MbValid.shDateBegin(example.logTimeSh)">
+			and DATE(log_time) &gt;= #{example.logTimeSh.begin}
+		</if>
+		<if test="MbValid.shDateEnd(example.logTimeSh)">
+			and DATE(log_time) &lt;= #{example.logTimeSh.end}
+		</if>
+		<if test="MbValid.str(example.searchType)">
+			and search_type = #{example.searchType}
+		</if>
+		</where>
+		order by log_time
+	</select>
+	
+	<select id="querySumSearch" resultType="SummaryNewAddUser">
+		SELECT 
+		log_time,
+		log_time as date,
+		sum(new_add_user) as new_add_user,
+		sum(new_add_account) as new_add_account
+		FROM summary_newadduser
+		<where>
+		<bind name="MbValid" value="@com.syg.manage.util.MbValid@instance()"/>
+		<if test="MbValid.str(example.gameKind)">
+			and game_kind = #{example.gameKind}
+		</if>
+		<if test="MbValid.str(example.channelId)">
+			and channel_id = #{example.channelId}
+		</if>
+		<if test="MbValid.str(example.gameVersion)">
+			and game_version = #{example.gameVersion}
+		</if>
+		<if test="MbValid.shDateBegin(example.logTimeSh)">
+			and DATE(log_time) &gt;= #{example.logTimeSh.begin}
+		</if>
+		<if test="MbValid.shDateEnd(example.logTimeSh)">
+			and DATE(log_time) &lt;= #{example.logTimeSh.end}
+		</if>
+		<if test="MbValid.str(example.searchType)">
+			and search_type = #{example.searchType}
+		</if>
+		</where>
+		GROUP BY DATE(log_time)
+	</select>
+	
+	<select id="queryListPage" resultType="SummaryNewAddUser">
+		SELECT 
+		log_time,
+		log_time as date,
+		sum(new_add_user) as new_add_user,
+		sum(new_add_account) as new_add_account
+		FROM summary_newadduser 
+		<where>
+		<bind name="MbValid" value="@com.syg.manage.util.MbValid@instance()"/>
+		<if test="MbValid.str(example.gameKind)">
+			and game_kind = #{example.gameKind}
+		</if>
+		<if test="MbValid.str(example.channelId)">
+			and channel_id = #{example.channelId}
+		</if>
+		<if test="MbValid.str(example.gameVersion)">
+			and game_version = #{example.gameVersion}
+		</if>
+		<if test="MbValid.shDateBegin(example.logTimeSh)">
+			and DATE(log_time) &gt;= #{example.logTimeSh.begin}
+		</if>
+		<if test="MbValid.shDateEnd(example.logTimeSh)">
+			and DATE(log_time) &lt;= #{example.logTimeSh.end}
+		</if>
+		</where> 
+		GROUP BY DATE(log_time)
+	</select>
+	
+	<select id="querySumSearchs" resultType="SummaryNewAddUser">
+			SELECT
+				*
+			FROM
+				summary_newadduser
+			WHERE
+			 channel_id &lt;&gt; "--"
+			AND game_version = "--"
+		<bind name="MbValid" value="@com.syg.manage.util.MbValid@instance()"/>
+		<if test="MbValid.str(example.gameKind)">
+			and game_kind = #{example.gameKind}
+		</if>
+		<if test="MbValid.shDateBegin(example.logTimeSh)">
+			and DATE(log_time) &gt;= #{example.logTimeSh.begin}
+		</if>
+		<if test="MbValid.shDateEnd(example.logTimeSh)">
+			and DATE(log_time) &lt;= #{example.logTimeSh.end}
+		</if>
+		<if test="MbValid.str(example.searchType)">
+			and search_type = #{example.searchType}
+		</if>
+		ORDER BY log_time
+	</select>
+</mapper>

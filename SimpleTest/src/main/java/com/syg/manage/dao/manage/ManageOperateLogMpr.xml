@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.syg.manage.dao.manage.ManageOperateLogMpr">
+
+	<insert id="saveItem" parameterType="ManageOperateLog" useGeneratedKeys="true">
+			INSERT INTO manage_operate_log 
+			(
+				user_id,
+				user_name,
+				log_time,
+				operate_name,
+				method_name
+				)VALUES
+				(
+				#{userId},
+				#{userName},
+				#{logTime},
+				#{operateName},
+				#{methodName}
+			)
+	</insert>
+	
+	<select id="queryListPageSearch" resultType="ManageOperateLog">
+	SELECT * FROM manage_operate_log 
+		<where>
+		<bind name="MbValid" value="@com.syg.manage.util.MbValid@instance()"/>
+		<if test="MbValid.noZero(example.userId)">and user_id = #{example.userId}</if>
+		<if test="MbValid.str(example.userName)">and user_name = #{example.userName}</if>
+		<if test="MbValid.str(example.operateName)">and operate_name = #{example.operateName}</if>
+		<if test="MbValid.str(example.methodName)">and method_name = #{example.methodName}</if>
+		<if test="MbValid.shDateBegin(example.logTimeSh)">and log_time &gt;= #{example.logTimeSh.begin}</if>
+		<if test="MbValid.shDateEnd(example.logTimeSh)">and log_time &lt;= #{example.logTimeSh.end}</if>
+		</where>
+	</select>
+	
+	
+</mapper>

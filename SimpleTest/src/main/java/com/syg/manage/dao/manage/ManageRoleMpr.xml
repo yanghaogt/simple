@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.syg.manage.dao.manage.ManageRoleMpr">
+
+	<insert id="saveItem" parameterType="ManageRole" useGeneratedKeys="true">
+			INSERT INTO manage_role 
+			(
+				role_name
+			)VALUES
+			(
+				#{roleName}
+			)
+	</insert>
+	
+	<select id="queryByMrId" resultType="ManageRole">
+	SELECT * FROM manage_role WHERE mr_id = #{mrId}
+	</select>
+	
+	<select id="queryByRoleName" resultType="ManageRole">
+	SELECT * FROM manage_role WHERE role_name = #{roleName}
+	</select>
+	
+	<select id="queryAll" resultType="ManageRole">
+	SELECT * FROM manage_role
+	</select>
+	
+	<select id="queryListPageSearch" resultType="ManageRole">
+	SELECT * FROM manage_role 
+		<where>
+		<bind name="MbValid" value="@com.syg.manage.util.MbValid@instance()"/>
+		<if test="example.mrId > 0">mr_id = #{example.mrId}</if>
+		<if test="MbValid.str(example.roleName)">and role_name = #{example.roleName}</if>
+		</where>
+	</select>
+	
+	<update id="updateItem">
+	UPDATE manage_role
+	SET
+		role_name = #{roleName}
+	WHERE
+		mr_id=#{mrId}
+	</update>
+</mapper>

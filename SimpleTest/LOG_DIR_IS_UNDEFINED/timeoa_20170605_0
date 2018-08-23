@@ -1,0 +1,32 @@
+2017-06-05 16:03:10.700 INFO  com.syg.manage.example.PackPool - 打包id[1]		等待池(0),打包中(1),应用打包数量(1)
+2017-06-05 16:03:10.707 INFO  com.syg.manage.example.PackHandle - 打包处理开始1
+2017-06-05 16:03:10.730 INFO  com.syg.manage.example.PackHandle - 拷贝原始项目开始
+2017-06-05 16:03:10.730 INFO  com.syg.manage.example.PackHandle - 拷贝原始项目结束
+2017-06-05 16:03:10.730 INFO  com.syg.manage.example.PackHandle - 拷贝并初步处理所有SDK开始
+2017-06-05 16:03:10.731 INFO  com.syg.manage.example.PackHandle - 拷贝并初步处理所有SDK结束
+2017-06-05 16:03:10.731 INFO  com.syg.manage.example.PackHandle - manifest等文件处理开始
+2017-06-05 16:03:10.736 INFO  com.syg.manage.example.PackHandle - manifest等文件处理结束
+2017-06-05 16:03:10.737 INFO  com.syg.manage.example.PackHandle - 备份class开始
+2017-06-05 16:03:10.737 INFO  com.syg.manage.example.PackHandle - 备份class结束
+2017-06-05 16:03:10.737 INFO  com.syg.manage.example.PackHandle - 合并资源开始
+2017-06-05 16:03:10.737 INFO  com.syg.manage.example.PackHandle - 合并资源结束
+2017-06-05 16:03:10.737 INFO  com.syg.manage.example.PackHandle - 更新lib开始
+2017-06-05 16:03:10.737 INFO  com.syg.manage.example.PackHandle - 更新lib结束
+2017-06-05 16:03:10.737 INFO  com.syg.manage.example.PackHandle - 处理名字和icon和新的R.class开始
+2017-06-05 16:03:10.737 INFO  com.syg.manage.example.PackHandle - 处理名字和icon和新的R.class结束
+2017-06-05 16:03:10.737 INFO  com.syg.manage.example.PackHandle - 生成slot.json开始
+2017-06-05 16:03:10.737 INFO  com.syg.manage.example.PackHandle - 生成slot.json结束
+2017-06-05 16:03:10.738 INFO  com.syg.manage.example.PackHandle - 编译classes开始
+2017-06-05 16:03:10.738 INFO  com.syg.manage.example.PackHandle - 编译classes结束
+2017-06-05 16:03:10.738 INFO  com.syg.manage.example.PackHandle - 替换资源文件开始
+2017-06-05 16:03:10.738 INFO  com.syg.manage.example.PackHandle - 替换资源文件结束
+2017-06-05 16:03:10.738 INFO  com.syg.manage.example.PackHandle - 渠道特殊处理开始
+2017-06-05 16:03:10.738 INFO  com.syg.manage.example.PackHandle - 渠道特殊处理结束
+2017-06-05 16:03:10.738 INFO  com.syg.manage.example.PackHandle - 编译打包开始
+2017-06-05 16:03:10.738 INFO  com.syg.manage.example.PackHandle - 准备apkZipAlign
+2017-06-05 16:03:10.738 INFO  com.syg.manage.example.PackHandle - zipalign优化开始
+2017-06-05 16:03:10.738 INFO  com.syg.manage.example.PackHandle - apkZipAlign 结束
+2017-06-05 16:03:10.738 INFO  com.syg.manage.example.PackHandle - zipalign优化结束
+2017-06-05 16:03:10.739 INFO  com.syg.manage.example.PackHandle - 开始签名...
+2017-06-05 16:03:10.739 INFO  com.syg.manage.example.PackHandle - 签名完成
+2017-06-05 16:03:10.739 INFO  com.syg.manage.example.PackHandle - 打包结束

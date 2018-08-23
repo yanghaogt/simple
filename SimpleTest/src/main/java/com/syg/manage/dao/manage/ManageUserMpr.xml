@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.syg.manage.dao.manage.ManageUserMpr">
+
+	<insert id="saveItem" parameterType="ManageUser" useGeneratedKeys="true">
+			INSERT INTO manage_user 
+			(
+				user_name,
+				real_name,
+				password,
+				reg_time,
+				last_login_time,
+				mr_id
+			)VALUES
+			(
+				#{userName},
+				#{realName},
+				#{password},
+				#{regTime},
+				#{lastLoginTime},
+				#{mrId}
+			)
+	</insert>
+	
+	<select id="queryAll" resultType="ManageUser">
+	SELECT * FROM manage_user
+	</select>
+	
+	<select id="queryByMuId" resultType="ManageUser">
+	SELECT * FROM manage_user WHERE mu_id = #{muId}
+	</select>
+	<select id="queryByUserName" resultType="ManageUser">
+	SELECT * FROM manage_user WHERE user_name = #{userName} limit 0,1
+	</select>
+	
+	
+	<select id="queryListPageSearch" resultType="ManageUser">
+	SELECT * FROM manage_user
+	<bind name="MbValid" value="@com.syg.manage.util.MbValid@instance()"/>
+	<where>
+		<if test="MbValid.str(example.userName)">
+		and user_name = #{example.userName}
+		</if>
+		<if test="MbValid.str(example.realName)">
+		and real_name = #{example.realName}
+		</if>
+		<if test="MbValid.shDateBegin(example.regTimeSh)">
+		and reg_time &gt;= #{example.regTimeSh.begin}
+		</if>
+		<if test="MbValid.shDateEnd(example.regTimeSh)">
+		and reg_time &lt;= #{example.regTimeSh.end}
+		</if>
+		<if test="MbValid.shDateBegin(example.lastLoginTimeSh)">
+		and last_login_time &gt;= #{example.lastLoginTimeSh.begin}
+		</if>
+		<if test="MbValid.shDateEnd(example.lastLoginTimeSh)">
+		and last_login_time &lt;= #{example.lastLoginTimeSh.end}
+		</if>
+		<if test="MbValid.noZero(example.mrId)">
+		and mr_id = #{example.mrId}
+		</if>
+	</where>
+	</select>
+	
+	
+	<update id="updateItem">
+	UPDATE manage_user
+	SET
+		real_name = #{realName},
+		password = #{password},
+		mr_id = #{mrId}
+	WHERE
+		mu_id=#{muId}
+	</update>
+	
+	<update id="updateImg">
+	UPDATE manage_user
+	SET
+		head_img = #{headImg}
+	WHERE
+		mu_id=#{muId}
+	</update>
+	
+	<update id="updateLastLogin">
+	UPDATE manage_user
+	SET
+		last_login_time = #{lastLoginTime}
+	WHERE
+		mu_id=#{muId}
+	</update>
+</mapper>

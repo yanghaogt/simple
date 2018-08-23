@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.syg.manage.dao.game.ActivityMapper">
+
+	<select id="select" parameterType="Activity" resultType="Activity">
+		SELECT * FROM activity
+		<where>
+			<if test="example.id != null">
+				AND ID = #{example.id}
+			</if>
+			<if test="example.des != null">
+				AND des = #{example.des}
+			</if>			
+			<if test="example.name != null">
+				AND name = #{example.name}
+			</if>
+			<if test="example.icon != null">
+				AND icon = #{example.icon}
+			</if>
+			<if test="example.type != null">
+				AND `type` = #{example.type}
+			</if>		
+			<if test="example.detailType != null">
+				AND detailType = #{example.detailType}
+			</if>						
+			<if test="example.order != null">
+				AND `order` = #{example.order}
+			</if>
+			<if test="example.activityType != null">
+				AND activity_type = #{example.activityType}
+			</if>			
+			<if test="example.extendShowTime != null">
+				AND extendShowTime = #{example.extendShowTime}
+			</if>
+			<if test="example.alwaysShow != null">
+				AND alwaysShow = #{example.alwaysShow}
+			</if>
+			<if test="example.content != null">
+				AND content = #{example.content}
+			</if>
+			<if test="example.level != null">
+				AND `level` = #{example.level}
+			</if>
+			<if test="example.days != null">
+				AND days = #{example.days}
+			</if>					
+			<if test="example.time != null">
+				AND `time` = #{example.time}
+			</if>			
+			<if test="example.des != null">
+				AND des = #{example.des}
+			</if>
+			<if test="example.times != null">
+				AND times = #{example.times}
+			</if>
+			<if test="example.reward != null">
+				AND reward = #{example.reward}
+			</if>
+			<if test="example.details != null">
+				AND details = #{example.details}
+			</if>
+			<if test="example.mapId != null">
+				AND mapId = #{example.mapId}
+			</if>
+			<if test="example.args != null">
+				AND args = #{example.args}
+			</if>
+			<if test="example.state != null">
+				and `state` = #{example.state}
+			</if>
+			<if test="example.typeDesc != null and example.typeDesc>0">
+				and type_desc = #{example.typeDesc}
+			</if>
+			<if test="example.serverId != null">
+				and server_id = #{example.serverId}
+			</if>
+		</where>
+		order by (id+0)
+	</select>
+	
+	
+	<insert id="insert" parameterType="Activity" useGeneratedKeys="true">
+		INSERT INTO activity(
+			  `ID`,
+			  `des`,
+			  `name`,
+			  `icon`,
+			  `type`,
+			  `detailType`,
+			  `order`,
+			  `activity_type`,
+			  `extendShowTime`,
+			  `alwaysShow`,
+			  `content`,
+			  `level`,
+			  `days`,
+			  `time`,
+			  `times`,
+			  `reward`,
+			  `details`,
+			  `mapId`,
+			  `args`,
+			  state,
+			  type_desc,
+			  server_id
+		)VALUES(
+			#{example.id},
+			#{example.des},
+			#{example.name},
+			#{example.icon},
+			#{example.type},
+			#{example.detailType},
+			#{example.order},
+			#{example.activityType},
+			#{example.extendShowTime},
+			#{example.alwaysShow},
+			#{example.content},
+			#{example.level},
+			#{example.days},
+			#{example.time},
+			#{example.times},
+			#{example.reward},
+			#{example.details},
+			#{example.mapId},
+			#{example.args},
+			#{example.state},
+			#{example.typeDesc},
+			#{example.serverId}
+		)
+	</insert>
+	
+</mapper>

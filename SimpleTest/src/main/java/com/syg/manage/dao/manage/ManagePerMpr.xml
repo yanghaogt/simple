@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.syg.manage.dao.manage.ManagePerMpr">
+
+	<insert id="saveItem" parameterType="ManagePer" useGeneratedKeys="false">
+			INSERT INTO manage_per 
+			(
+				mp_id,
+				per_name,
+				father_mp_id,
+				page_url,
+				sim_desc
+			)VALUES
+			(
+				#{mpId},
+				#{perName},
+				#{fatherMpId},
+				#{pageUrl},
+				#{simDesc}
+			)
+	</insert>
+	
+	<select id="queryByfatherId" resultType="ManagePer">
+	SELECT * FROM manage_per WHERE father_mp_id = #{fatherId}
+	</select>
+	
+	<select id="queryByMpId" resultType="ManagePer">
+	SELECT * FROM manage_per WHERE mp_id = #{mpId}
+	</select>
+	
+	<select id="queryAll" resultType="ManagePer">
+	SELECT * FROM manage_per
+	</select>
+	
+	<select id="queryListPageSearch" resultType="ManagePer">
+	SELECT * FROM manage_per 
+		<where>
+		<bind name="MbValid" value="@com.syg.manage.util.MbValid@instance()"/>
+		<if test="MbValid.noZero(example.mpId)">and mp_id = #{example.mpId}</if>
+		<if test="MbValid.str(example.perName)">and per_name = #{example.perName}</if>
+		<if test="MbValid.str(example.pageUrl)">and page_url = #{example.pageUrl}</if>
+		<if test="MbValid.str(example.simDesc)">and desc = #{example.simDesc}</if>
+		</where>
+	</select>
+	
+	<update id="updateItem">
+	UPDATE manage_per 
+	SET
+		mp_id= #{mpId},
+		per_name = #{perName},
+		page_url = #{pageUrl},
+		sim_desc = #{simDesc}
+	WHERE
+		mp_id = #{mpId}
+	</update>
+	<update id="updateFatherId">
+	UPDATE manage_per 
+	SET
+		father_mp_id=#{fatherId}
+	WHERE
+		mp_id = #{mpId}
+	</update>
+	
+</mapper>

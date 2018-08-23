@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.syg.manage.dao.manage.SurveyTypeMpr">
+
+	<select id="queryListPageSearch" resultType="SurveyType">
+		SELECT * FROM survey_type
+		<where>
+			<bind name="MbValid" value="@com.syg.manage.util.MbValid@instance()" />
+			<if test="MbValid.noZero(example.stId)">
+				and st_id = #{example.stId}
+			</if>
+			<if test="MbValid.str(example.stTitle)">
+				and st_title = #{example.stTitle}
+			</if>
+			<if test="MbValid.str(example.imageUrl)">
+				and image_url= #{example.imageUrl}
+			</if>
+			<if test="MbValid.str(example.stStatus)">
+				and st_status= #{example.stStatus}
+			</if>
+			<if test="MbValid.str(example.stDetail)">
+				and st_detail= #{example.stDetail}
+			</if>
+					<if test="MbValid.shDateBegin(example.createTimeSh)">
+				and create_time &gt;= #{example.createTimeSh.begin}
+			</if>
+			<if test="MbValid.shDateEnd(example.createTimeSh)">
+				and create_time &lt;= #{example.createTimeSh.end}
+			</if>
+		</where>
+	</select>
+	
+	<select id="queryAll" resultType="SurveyType">
+	SELECT * FROM survey_type 
+	</select>
+	
+	<select id="queryByTitle" resultType="SurveyType">
+	SELECT * FROM survey_type WHERE st_title = #{stTitle}
+	</select>
+	
+	<select id="queryById" resultType="SurveyType">
+	SELECT * FROM survey_type WHERE st_id = #{id}
+	</select>
+	
+	<delete id="deleteById">
+	DELETE FROM survey_type WHERE st_id = #{id}
+	</delete>
+	
+	<insert id="saveItem" parameterType="SurveyType" useGeneratedKeys="true">
+			INSERT INTO survey_type
+			(
+				st_id,
+				st_title,
+				image_url,
+				operator,
+				st_status,
+				st_detail,
+				begin_time,
+				end_time,
+				st_dkp,
+				create_time
+
+			)VALUES
+			(
+				#{stId},
+				#{stTitle},
+				#{imageUrl},
+				#{operator},
+				#{stStatus},
+				#{stDetail},
+				#{beginTime},
+				#{endTime},
+				#{stDkp},
+				#{createTime}
+			)
+	</insert>
+	<update id="updateItem">
+		UPDATE survey_type
+		SET
+			st_title = #{stTitle},
+			image_url = #{imageUrl},
+			st_status = #{stStatus},
+			st_detail = #{stDetail},
+			sc_id = #{scId},
+			begin_time = #{beginTime},
+			end_time = #{endTime},
+			st_dkp = #{stDkp},
+			update_time = #{updateTime}
+		WHERE
+			st_id=#{stId}
+	</update>
+	
+</mapper>

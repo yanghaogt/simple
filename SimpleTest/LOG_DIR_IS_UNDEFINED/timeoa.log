@@ -1,0 +1,37 @@
+2018-05-25 12:06:08.246 INFO  com.syg.manage.util.script.CmdUtil - RUN CMD:D:\Workspaces\CqManage\update_test.bat
+2018-05-25 12:06:08.300 WARN  com.syg.manage.util.script.CmdUtil - RUN CMD ERROR: Cannot run program "D:\Workspaces\CqManage\update_test.bat": CreateProcess error=2, ϵͳÕҲ»µ½ָ¶
+java.io.IOException: Cannot run program "D:\Workspaces\CqManage\update_test.bat": CreateProcess error=2, ϵͳÕҲ»µ½ָ¶
+	at java.lang.ProcessBuilder.start(ProcessBuilder.java:1041) ~[na:1.7.0_45]
+	at java.lang.Runtime.exec(Runtime.java:617) ~[na:1.7.0_45]
+	at java.lang.Runtime.exec(Runtime.java:450) ~[na:1.7.0_45]
+	at java.lang.Runtime.exec(Runtime.java:347) ~[na:1.7.0_45]
+	at com.syg.manage.util.script.CmdUtil.xx(CmdUtil.java:30) ~[classes/:na]
+	at com.syg.manage.util.script.CmdUtil.cmd(CmdUtil.java:21) ~[classes/:na]
+	at com.syg.manage.util.script.ReTools.cmd(ReTools.java:42) [classes/:na]
+	at com.syg.manage.util.script.ReTools.test(ReTools.java:30) [classes/:na]
+	at com.syg.manage.util.script.ReTools$1.run(ReTools.java:49) [classes/:na]
+	at java.lang.Thread.run(Thread.java:744) [na:1.7.0_45]
+Caused by: java.io.IOException: CreateProcess error=2, ϵͳÕҲ»µ½ָ¶
+	at java.lang.ProcessImpl.create(Native Method) ~[na:1.7.0_45]
+	at java.lang.ProcessImpl.<init>(ProcessImpl.java:385) ~[na:1.7.0_45]
+	at java.lang.ProcessImpl.start(ProcessImpl.java:136) ~[na:1.7.0_45]
+	at java.lang.ProcessBuilder.start(ProcessBuilder.java:1022) ~[na:1.7.0_45]
+	... 9 common frames omitted
+2018-05-25 12:06:08.301 INFO  com.syg.manage.util.script.ReTools - result：[]
+2018-05-25 12:06:08.301 INFO  com.syg.manage.util.script.ReTools - USER_DIR：D:\Workspaces\Simple/
+2018-05-25 12:08:34.801 INFO  com.syg.manage.util.script.CmdUtil - RUN CMD:D:\apache-tomcat-7.0.72\webapps\tool_work\update_test.bat
+2018-05-25 12:08:35.148 INFO  com.syg.manage.util.script.CmdUtil - exitValue:0
+2018-05-25 12:08:35.148 INFO  com.syg.manage.util.script.ReTools - result：[, D:\Workspaces\Simple>echo "test" , "test"]
+2018-05-25 12:08:35.148 INFO  com.syg.manage.util.script.ReTools - USER_DIR：D:\Workspaces\Simple/
+2018-05-25 12:08:37.667 INFO  com.syg.manage.util.script.CmdUtil - RUN CMD:D:\apache-tomcat-7.0.72\webapps\tool_work\update_test.bat
+2018-05-25 12:08:37.901 INFO  com.syg.manage.util.script.CmdUtil - exitValue:0
+2018-05-25 12:08:37.901 INFO  com.syg.manage.util.script.ReTools - result：[, D:\Workspaces\Simple>echo "test" , "test"]
+2018-05-25 12:08:37.901 INFO  com.syg.manage.util.script.ReTools - USER_DIR：D:\Workspaces\Simple/
+2018-05-25 12:09:44.340 INFO  com.syg.manage.util.script.CmdUtil - RUN CMD:D:\apache-tomcat-7.0.72\webapps\tool_work\update_test.bat
+2018-05-25 12:09:44.575 INFO  com.syg.manage.util.script.CmdUtil - exitValue:0
+2018-05-25 12:09:44.576 INFO  com.syg.manage.util.script.ReTools - result：[, D:\Workspaces\Simple>echo "test" , "test"]
+2018-05-25 12:09:44.576 INFO  com.syg.manage.util.script.ReTools - USER_DIR：D:\Workspaces\Simple/
+2018-05-25 12:46:35.813 INFO  com.syg.manage.util.script.CmdUtil - RUN CMD:D:\apache-tomcat-7.0.72\webapps\tool_work\update_test.bat
+2018-05-25 12:46:44.906 INFO  com.syg.manage.util.script.CmdUtil - exitValue:0
+2018-05-25 12:46:44.906 INFO  com.syg.manage.util.script.ReTools - result：[, D:\Workspaces\Simple>echo "test" , "test"]
+2018-05-25 12:46:44.906 INFO  com.syg.manage.util.script.ReTools - USER_DIR：D:\Workspaces\Simple/

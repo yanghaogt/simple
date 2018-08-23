@@ -23,6 +23,9 @@ public class DateUtil {
 	}
 	
 	public static Date todayTimeZero(){
+		System.out.println();
+		System.out.println();
+		System.out.println();
 		return timeZeroDate(0);
 	}
 	public static Date yestodayTimeZero(){
